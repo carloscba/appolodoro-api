@@ -1,4 +1,4 @@
 module.exports = {
 	name: 'required',
-    email: 'required|email'
+    description: 'required'
 }

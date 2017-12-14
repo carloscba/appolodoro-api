@@ -7,11 +7,13 @@ const app = express()
 const server = http.createServer(app)
 const bodyParser = require('body-parser');
 const users = require('./api/users')
+const hacks = require('./api/hacks')
 
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({ extended: true }))
 
 app.use('/api/users', users)
+app.use('/api/hacks', hacks)
 
 app.use((err, req, res, next) => {
     res.status(500).send({ 

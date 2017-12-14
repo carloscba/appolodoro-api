@@ -1,16 +1,20 @@
 const express = require('express')
 const api = express.Router()
-const Validator = require('validatorjs');
-const admin = require('firebase-admin');
-const serviceAccount = require('../serviceAccountKey.json');
+const Validator = require('validatorjs')
+const admin = require('firebase-admin')
+const serviceAccount = require('../../serviceAccountKey.json')
 const Model = require('./model')
 
-const COLLECTION = 'users'
+const COLLECTION = 'hacks'
+try{
+    admin.initializeApp({
+        credential: admin.credential.cert(serviceAccount),
+        databaseURL: 'https://appolodoro-a6b3a.firebaseio.com'
+      });
+}catch(error){
+    console.log(error)
+}
 
-admin.initializeApp({
-  credential: admin.credential.cert(serviceAccount),
-  databaseURL: 'https://appolodoro-a6b3a.firebaseio.com'
-});
 var db = admin.firestore();
 
 api.get('/', (req, res, next) => {
