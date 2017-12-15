@@ -1,10 +1,14 @@
+require('dotenv').config()
 const express = require('express')
 const api = express.Router()
 const Validator = require('validatorjs')
-
+const auth = require('express-jwt')
+/**
+ * 
+ */
 setEndPoint = (COLLECTION, MODEL, db) => {
 
-    api.get('/', (req, res, next) => {
+    api.get('/', auth({secret : process.env.KEY}), (req, res, next) => {
         try{
             let docs = [];
             db.collection(COLLECTION).get().then((snapshot) => {
